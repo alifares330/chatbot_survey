@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavement Performance Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            letter-spacing: 1px; /* Improve spacing between letters */
+        }
+
+
+        h1::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 60%;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        .typing-text {
+          height: 40px; /* Set a fixed height for the text container */
+            line-height: 40px; /* Vertically center the text */
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid var(--accent);
+            width: 0;
+        }
+
+        .keyword-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .keyword-button {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            transition: 0.3s ease-in-out;
+        }
+
+        .keyword-button:hover {
+            background: var(--secondary);
+            color: var(--light);
+            transform: scale(1.1);  /* Slightly scale up the button */
+        }
+      
+        .keyword-button {
+              animation: fadeIn 0.6s ease-in-out forwards;
+              opacity: 0;
+          }
+
+
+      @keyframes fadeIn {
+          to {
+              opacity: 1;
+          }
+      }
+
+      .keyword-button:nth-child(1) {
+          animation-delay: 0.2s;
+      }
+      .keyword-button:nth-child(2) {
+          animation-delay: 0.4s;
+      }
+      .keyword-button:nth-child(3) {
+          animation-delay: 0.6s;
+      }
+      .keyword-button:nth-child(4) {
+          animation-delay: 0.8s;
+      }
+      .keyword-button:nth-child(5) {
+          animation-delay: 1.0s;
+      }
+      .keyword-button:nth-child(6) {
+          animation-delay: 1.2s;
+      }
+      .keyword-button:nth-child(7) {
+          animation-delay: 1.4s;
+      }
+      .keyword-button:nth-child(8) {
+          animation-delay: 1.6s;
+      }
+      .keyword-button:nth-child(9) {
+          animation-delay: 1.8s;
+      }
+
+      
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+          h1 {
+              font-size: 2rem;
+          }
+          .keyword-box {
+              display: flex;
+              justify-content: center; /* Horizontally centers the content */
+              width: 75%; /* Adjust the width */
+              margin: 0 auto; /* Centers the box horizontally */
+          }
+      }
+
+      @media (max-width: 480px) {
+          h1 {
+              font-size: 1.5rem;
+          }
+          .keyword-box {
+              display: flex;
+              justify-content: center; /* Horizontally centers the content */
+              width: 75%; /* Adjust the width */
+              margin: 0 auto; /* Centers the box horizontally */
+          }
+      }
+   
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    <h1>Pavement Performance Analysis</h1>
+    <div class="typing-text" id="typing-text"></div>
+    <div class="keyword-box" id="keyword-box"></div>
+    <div class="image-container">
+    <!-- Main Image Display -->
+     <div class="image-wrapper">
+        <!-- Main Image Display -->
+        <div class="image-container">
+            <img id="main-image" src="https://cdn.glitch.global/b9464b08-b3c2-45ab-ac5a-2fbe018f96d9/Pavement%20defects%20impact.png?v=1738957811463" alt="Pavement Defects" class="image-to-show">
+        </div>
+
+        <!-- Small Image Selection -->
+        <div class="thumbnail-container">
+            <img class="thumbnail" src="https://cdn.glitch.global/b9464b08-b3c2-45ab-ac5a-2fbe018f96d9/Pavement%20defects%20impact.png?v=1738957811463" alt="Pavement Defects" onclick="changeImage(this)">
+            <img class="thumbnail" src="https://cdn.glitch.global/b9464b08-b3c2-45ab-ac5a-2fbe018f96d9/Pavement%20defects.jpg?v=1738957803003" alt="Another Image" onclick="changeImage(this)">
+        </div>
+    </div>
+
+    <script>
+        function changeImage(selectedImage) {
+            document.getElementById("main-image").src = selectedImage.src;
+        }
+    </script>
+
+    <style>
+        /* Center the images */
+            /* By default, the image is hidden */
+.image-wrapper {
+    display: none;
+}
+      
+/* Show and center the image on screens 1366px and larger */
+@media (min-width: 1366px) {
+    .image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 10%; /* Add padding to prevent edge issues on large screens */
+    }
+  .image-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack main image and thumbnails vertically */
+    align-items: center;
+    gap: 15px; /* Space between main image and thumbnails */
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+    .image-to-show {
+        border-radius: 15px;
+        max-width: 75%;
+        max-height: 75vh;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        z-index: 1; /* Ensure the image stays above the gradient overlay */
+    }
+
+        .image-to-show:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Small thumbnail images */
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+      
+        
+    </style>
+      
+      
+    </div>
+
+    <script type="module">
+        import { VFDistressSelectionExtension } from './distress_selection.js';
+        import { VFUserDetails } from './User_Details.js';
+        import { VFWorkScope } from './work_scope.js';
+        import { FVRateDistress } from './rate_distress.js';
+        import { FVCriteriaComparisonMain } from './criteria_comparison_main.js';
+        import { FVCriteriaComparisonSub } from './criteria_comparison_sub.js';
+        import { FVDistressCompare } from './distress_compare.js';
+        import { VFShowImage } from './image_defect.js';
+
+        (function(d, t) {
+            var v = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+
+            v.onload = function() {
+                console.log("Voiceflow script loaded successfully.");
+                window.voiceflow.chat.load({
+                    verify: { projectID: '67b75a6596b0f76d5ad54589' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    assistant: {
+                        renderMode: 'widget',
+                        extensions: [
+                            VFDistressSelectionExtension, VFUserDetails, VFWorkScope, FVRateDistress,
+                            FVCriteriaComparisonMain, FVCriteriaComparisonSub, FVDistressCompare, VFShowImage
+                        ],
+                        persistence: 'memory',
+                        inputPlaceholder: 'Message...'
+                    },
+                    autostart: true,
+                }).then(() => {
+                    setTimeout(function() {
+                        window.voiceflow.chat.open();
+                    }, 500)
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+            v.type = "text/javascript";
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+        
+        const words = ["Rideability", "User Costs", "Safety", "Environmental Impact", "Pavement Deterioration"];
+        let index = 0;
+        const typingText = document.getElementById("typing-text");
+        const keywordBox = document.getElementById("keyword-box");
+
+        function typeEffect(text, callback) {
+            let i = 0;
+            typingText.innerHTML = "";
+            typingText.style.width = "auto";
+            function type() {
+                if (i < text.length) {
+                    typingText.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                } else {
+                    setTimeout(callback, 1500);
+                }
+            }
+            type();
+        }
+
+        function loopWords() {
+            typeEffect(words[index], () => {
+                index = (index + 1) % words.length;
+                typingText.innerHTML = "";
+                setTimeout(loopWords, 500);
+            });
+        }
+
+        const keywords = ["Surface Cracks", "Roughness", "Rutting", "Potholes", "Skid Resistance", "Bleeding", " Raveling", "Thickness Deficiency", "Sub-Surface Cracks"];
+        keywords.forEach(keyword => {
+            const button = document.createElement("button");
+            button.className = "keyword-button";
+            button.textContent = keyword;
+            keywordBox.appendChild(button);
+        });
+
+        loopWords();
+    </script>
+</body>
+</html>
